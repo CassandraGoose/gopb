@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import './App.css'
 import MainMap from './MainMap.tsx';
-
+import Navigation from './Navigation.tsx';
 function App() {
 
   const [restaurants, setRestaurants] = useState<[{ lat: number, long: number, color: string, name: string }] | []>([]);
@@ -28,6 +28,7 @@ function App() {
 
   return (
     <>
+    <Navigation />
      <MainMap restaurants={restaurants}/>
     </>
   )

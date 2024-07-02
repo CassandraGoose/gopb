@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
 
 export default function MainMap({
@@ -8,11 +7,8 @@ export default function MainMap({
     | [{ lat: number; long: number; color: string; name: string }]
     | [];
 }) {
-  const [center, setCenter] = useState<[number, number]>([39.74, -104.99]);
-  const [zoom, setZoom] = useState(12);
-
   return (
-    <Map height={500} defaultCenter={center} defaultZoom={zoom}>
+    <Map height={500} defaultCenter={[39.74, -104.99]} defaultZoom={12}>
       <ZoomControl />
       {restaurants.map(({name, lat, long, color}) => {
         console.log(name, lat, long)
