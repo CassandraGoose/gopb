@@ -11,10 +11,16 @@ export default function MainMap({
     | [];
 }) {
   const [overlay, setOverlay] = useState<JSX.Element | null>(null);
+
   const createRestaurantOverlay = (name: string, lat: number, long: number) => {
     setOverlay(
       <Overlay anchor={[lat, long]} offset={[-5, 15]}>
         <Card side compact className="bg-neutral text-base-100">
+          <div className="absolute right-[3%] top-[5%] text-white">
+            <button className="btn btn-square btn-sm" onClick={() => setOverlay(null)}>
+              X
+            </button>
+          </div>
           <Card.Image
             className="w-28 h-auto"
             src={restaurantPlaceholder}
