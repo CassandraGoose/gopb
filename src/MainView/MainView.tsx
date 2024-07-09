@@ -1,40 +1,13 @@
 import { useState, useEffect } from "react";
+import { ILocation } from "../interfaces";
 import MapFormControls from "./MapFormControls";
 import MainMap from "./MainMap";
 
 export default function MainView() {
-  const [restaurants, setRestaurants] = useState<
-    | [
-        {
-          lat: number;
-          long: number;
-          category: string;
-          tags: string[];
-          cuisine: string[];
-          name: string;
-          dateUpdated: string;
-          plantBasedLevel: string;
-          menu: string;
-        }
-      ]
-    | []
-  >([]);
+  const [restaurants, setRestaurants] = useState<[ILocation] | []>([]);
   const [viewingRestaurants, setViewingRestaurants] = useState<
-  | [
-      {
-        lat: number;
-        long: number;
-        category: string;
-        tags: string[];
-        cuisine: string[];
-        name: string;
-        dateUpdated: string;
-        plantBasedLevel: string;
-        menu: string;
-      }
-    ]
-  | []
->([]);
+    [ILocation] | []
+  >([]);
 
   useEffect(() => {
     async function getRestaurants() {
@@ -67,8 +40,11 @@ export default function MainView() {
 
   return (
     <>
-      <MapFormControls restaurants={restaurants} setViewingRestaurants={setViewingRestaurants} />
-      <MainMap restaurants={viewingRestaurants}/>
+      <MapFormControls
+        restaurants={restaurants}
+        setViewingRestaurants={setViewingRestaurants}
+      />
+      <MainMap restaurants={viewingRestaurants} />
     </>
   );
 }

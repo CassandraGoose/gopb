@@ -1,34 +1,16 @@
 import { useState } from "react";
 import { Map, Marker, ZoomControl } from "pigeon-maps";
+import { ILocation } from "../interfaces";
 import MapOverlay from "./MapOverlay";
 
 export default function MainMap({
   restaurants,
 }: {
-  restaurants:
-    | [
-        {
-          lat: number;
-          long: number;
-          category: string;
-          tags: string[];
-          cuisine: string[];
-          name: string;
-          dateUpdated: string;
-          plantBasedLevel: string;
-          menu: string;
-        }
-      ]
-    | [];
+  restaurants: [ILocation] | [];
 }) {
   const [overlay, setOverlay] = useState<JSX.Element | null>(null);
 
-  const createRestaurantOverlay = (restaurant: {
-    name: string;
-    lat: number;
-    long: number;
-    tags: string[];
-  }) => {
+  const createRestaurantOverlay = (restaurant: ILocation) => {
     setOverlay(
       <MapOverlay locationData={restaurant} setOverlay={setOverlay} />
     );
@@ -38,7 +20,8 @@ export default function MainMap({
     <>
       <Map height={500} defaultCenter={[39.74, -104.99]} defaultZoom={12}>
         <ZoomControl />
-        {restaurants.map(({ name, lat, long, category, tags }) => {
+        {restaurants.map((restaurant) => {
+          const { lat, long, name, category } = restaurant;
           const color = category === "Restaurant" ? "purple" : "green";
           return (
             <Marker
@@ -46,7 +29,7 @@ export default function MainMap({
               width={50}
               anchor={[lat, long]}
               color={color}
-              onClick={() => createRestaurantOverlay({ name, lat, long, tags })}
+              onClick={() => createRestaurantOverlay(restaurant)}
             />
           );
         })}

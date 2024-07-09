@@ -1,50 +1,52 @@
 import { ChangeEvent } from "react";
 import { Input, Select } from "react-daisyui";
+import { ILocation } from "../interfaces";
 
 export default function MapFormControls({
   restaurants,
   setViewingRestaurants,
 }: {
-  restaurants:
-    | [
-        {
-          lat: number;
-          long: number;
-          category: string;
-          tags: string[];
-          cuisine: string[];
-          name: string;
-          dateUpdated: string;
-          plantBasedLevel: string;
-          menu: string;
-        }
-      ]
-    | [];
-    setViewingRestaurants: React.Dispatch<React.SetStateAction<[] | [{
-      lat: number;
-      long: number;
-      category: string;
-      tags: string[];
-      cuisine: string[];
-      name: string;
-      dateUpdated: string;
-      plantBasedLevel: string;
-      menu: string;
-  }]>>
+  restaurants: [ILocation] | [];
+  setViewingRestaurants: React.Dispatch<React.SetStateAction<[] | [ILocation]>>;
 }) {
-
   const allCuisineOptions = Array.from(
     new Set(restaurants.map((rest) => rest.cuisine).flat())
   );
   allCuisineOptions.unshift("Any");
 
-  const handleLocationChange = (e: ChangeEvent<HTMLSelectElement>) => {
-    if (e.target.value === "Any") {
-      setViewingRestaurants(restaurants);
+  const handleFilterChange = (
+    e: ChangeEvent<HTMLSelectElement>,
+    type: string
+  ) => {
+    let updatedRestaurants = restaurants;
+    console.log("hi1", updatedRestaurants);
+
+    switch (type) {
+      case "category":
+        if (e.target.value !== "Any")
+          updatedRestaurants = restaurants.filter(
+            (rest) => rest.category === e.target.value
+          ) as [ILocation];
+        break;
+      case "cuisine":
+        if (e.target.value !== "Any")
+          updatedRestaurants = restaurants.filter((rest) =>
+            rest.cuisine.includes(e.target.value)
+          )  as [ILocation];
+        break;
+      case "plantBasedLevel":
+        if (e.target.value !== "Any")
+          updatedRestaurants = restaurants.filter(
+            (rest) => rest.plantBasedLevel === e.target.value
+          )  as [ILocation];
+        break;
+      default:
+        break;
     }
-    const updatedRestaurants = e.target.value === "Any" ? restaurants : restaurants.filter((rest) => rest.category === e.target.value)
+    console.log("hi2", updatedRestaurants);
     setViewingRestaurants(updatedRestaurants);
-  }
+  };
+
   return (
     <form className="flex w-full component-preview pb-2 items-center justify-start gap-2">
       <div className="form-control w-full max-w-xs">
@@ -60,7 +62,7 @@ export default function MapFormControls({
         <Select
           className="rounded border-1"
           defaultValue={"Any"}
-          onChange={(e) => handleLocationChange(e)}
+          onChange={(e) => handleFilterChange(e, "category")}
         >
           <Select.Option value="Any">Any</Select.Option>
           <Select.Option value="Restaurant">Restaurant</Select.Option>
@@ -74,7 +76,7 @@ export default function MapFormControls({
         <Select
           className="rounded border-1"
           defaultValue={"Any"}
-          onChange={() => console.log("changed!")}
+          onChange={(e) => handleFilterChange(e, "cuisine")}
         >
           {allCuisineOptions.map((cuisine) => {
             return (
@@ -87,20 +89,16 @@ export default function MapFormControls({
       </div>
       <div className="form control">
         <label className="label">
-          <span className="label-text">Cuisine Type:</span>
+          <span className="label-text">Plant-Based Level:</span>
         </label>
         <Select
           className="rounded border-1"
           defaultValue={"Any"}
-          onChange={() => console.log("changed!")}
+          onChange={(e) => handleFilterChange(e, "plantBasedLevel")}
         >
           <Select.Option value="Any">Any</Select.Option>
-          <Select.Option value="Fully Plant-Based">
-            Fully Plant Based
-          </Select.Option>
-          <Select.Option value="Partially Plant-Based">
-            Partiallay Plant-Based
-          </Select.Option>
+          <Select.Option value="full">Fully Plant Based</Select.Option>
+          <Select.Option value="partial">Partiallay Plant-Based</Select.Option>
         </Select>
       </div>
     </form>

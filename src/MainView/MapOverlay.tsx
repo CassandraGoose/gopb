@@ -1,12 +1,13 @@
 import { Overlay } from "pigeon-maps";
 import { Card, Button } from "react-daisyui";
+import { ILocation } from "../interfaces";
 import restaurantPlaceholder from "../assets/placeholder_restaurant.png";
 
 export default function MapOverlay({
   locationData,
   setOverlay,
 }: {
-  locationData: { lat: number; long: number; tags: string[]; name: string };
+  locationData: ILocation;
   setOverlay: React.Dispatch<React.SetStateAction<JSX.Element | null>>;
 }) {
   const { lat, long, name, tags } = locationData;
