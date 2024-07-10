@@ -33,7 +33,7 @@ export default function MapOverlay({
           <Card.Title tag="h2">{name}</Card.Title>
           <div className="flex flex-row gap-2 max-w-[100%] flex-wrap">
             {tags.map((tag) => {
-              return (<Badge color="secondary">
+              return (<Badge key="tag" color="secondary">
                 {tag}
               </Badge>)
             })}

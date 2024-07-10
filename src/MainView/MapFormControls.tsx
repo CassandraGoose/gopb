@@ -25,7 +25,9 @@ export default function MapFormControls({
       const searchOptions =
         completedKeyword === ""
           ? true
-          : rest.menu.includes(completedKeyword.toLowerCase());
+          : rest.menu.some((item: string) =>
+              item.includes(completedKeyword.toLowerCase())
+            );
       const locationOptions =
         locationType === "Any" ? true : rest.category.includes(locationType);
       const cuisineOptions =

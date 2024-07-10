@@ -7,6 +7,6 @@ export interface ILocation {
   name: string;
   dateUpdated: string;
   plantBasedLevel: string;
-  menu: string;
+  menu: string[];
 }
 

@@ -20,7 +20,7 @@ export default function MainView() {
           (item: ILocation) => {
             item.lat = parseFloat(item.lat as unknown as string);
             item.long = parseFloat(item.long as unknown as string);
-            item.menu = item.menu.toLowerCase();
+            item.menu = item.menu.map((item) => item.toLowerCase());
             return item;
           }
         );
