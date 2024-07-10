@@ -6,7 +6,7 @@ import MapOverlay from "./MapOverlay";
 export default function MainMap({
   restaurants,
 }: {
-  restaurants: [ILocation] | [];
+  restaurants: ILocation[] | [];
 }) {
   const [overlay, setOverlay] = useState<JSX.Element | null>(null);
 

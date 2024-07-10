@@ -4,9 +4,9 @@ import MapFormControls from "./MapFormControls";
 import MainMap from "./MainMap";
 
 export default function MainView() {
-  const [restaurants, setRestaurants] = useState<[ILocation] | []>([]);
+  const [restaurants, setRestaurants] = useState<ILocation[] | []>([]);
   const [viewingRestaurants, setViewingRestaurants] = useState<
-    [ILocation] | []
+    ILocation[] | []
   >([]);
 
   useEffect(() => {
@@ -17,14 +17,10 @@ export default function MainView() {
         const json = await response.json();
         // remove when getting real data
         const restaurants = json.map(
-          (item: {
-            name: string;
-            lat: string | number;
-            long: string | number;
-            color: string;
-          }) => {
-            item.lat = parseFloat(item.lat as string);
-            item.long = parseFloat(item.long as string);
+          (item: ILocation) => {
+            item.lat = parseFloat(item.lat as unknown as string);
+            item.long = parseFloat(item.long as unknown as string);
+            item.menu = item.menu.toLowerCase();
             return item;
           }
         );
