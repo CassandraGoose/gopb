@@ -1,5 +1,5 @@
 import { Overlay } from "pigeon-maps";
-import { Card, Button } from "react-daisyui";
+import { Card, Button, Badge } from "react-daisyui";
 import { ILocation } from "../interfaces";
 import restaurantPlaceholder from "../assets/placeholder_restaurant.png";
 
@@ -12,10 +12,11 @@ export default function MapOverlay({
 }) {
   const { lat, long, name, tags } = locationData;
 
+  console.log(lat, long)
   return (
-    <Overlay anchor={[lat, long]} offset={[-5, 15]}>
-      <Card side compact className="bg-neutral text-base-100">
-        <div className="absolute right-[3%] top-[5%] text-white">
+    <Overlay>
+      <Card className="bg-neutral text-base-100 m-4 p-4 rounded flex flex-col gap-2 w-96">
+        <div>
           <button
             className="btn btn-square btn-sm"
             onClick={() => setOverlay(null)}
@@ -30,9 +31,15 @@ export default function MapOverlay({
         />
         <Card.Body>
           <Card.Title tag="h2">{name}</Card.Title>
-          <p>{tags.join(" ")}</p>
-          <Card.Actions className="justify-end">
-            <Button color="primary">See on Google Maps</Button>
+          <div className="flex flex-row gap-2 max-w-[100%] flex-wrap">
+            {tags.map((tag) => {
+              return (<Badge color="secondary">
+                {tag}
+              </Badge>)
+            })}
+          </div>
+          <Card.Actions className="flex justify-center items-center pt-4">
+            <Button color="primary" className="rounded">See on Google Maps</Button>
           </Card.Actions>
         </Card.Body>
       </Card>

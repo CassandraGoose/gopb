@@ -19,7 +19,8 @@ export default function MainMap({
   return (
     <>
       <Map height={500} defaultCenter={[39.74, -104.99]} defaultZoom={12}>
-        <ZoomControl />
+        <ZoomControl style={{ left: "auto", right: "10px" }} />
+
         {restaurants.map((restaurant) => {
           const { lat, long, name, category } = restaurant;
           const color = category === "Restaurant" ? "purple" : "green";
