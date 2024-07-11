@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { ILocation } from "../interfaces";
+import { useSearchParams } from "react-router-dom";
 import { Card, Button, Badge, Stats } from "react-daisyui";
 import Map, {
   NavigationControl,
@@ -9,6 +9,8 @@ import Map, {
   MapMouseEvent,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import { ILocation } from "../interfaces";
+import store from "../app/store";
 
 export default function MainMap({
   restaurants,
@@ -18,6 +20,11 @@ export default function MainMap({
   const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
     null
   );
+  const [, setSearchParams] = useSearchParams();
+
+  const setLocationParameter = (name: string) => {
+    setSearchParams({ selectedLocation: name });
+  }
 
   return (
     <>
@@ -102,7 +109,7 @@ export default function MainMap({
                   </Stats>
                 </div>
                 <Card.Actions className="flex justify-center items-center pt-4">
-                  <Button color="primary" className="rounded join-item">
+                  <Button color="primary" className="rounded join-item" onClick={() => setLocationParameter(selectedLocation.name)}>
                     See More Information
                   </Button>
                 </Card.Actions>

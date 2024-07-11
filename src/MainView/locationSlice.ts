@@ -3,11 +3,17 @@ import store from '../app/store';
 import { ILocation } from "../interfaces";
 
 export const locationSlice = createSlice({
-  name: 'locations',
-  initialState: [],
+  name: 'mapFunctionality',
+  initialState: {
+    locations: [],
+    currentLocation: null,
+  },
   reducers: {
     setLocations: (state, action) => {
-      return action.payload;
+      state.locations = action.payload;
+    },
+    setSingleLocation: (state, action) => {
+      state.currentLocation = action.payload;
     }
   }
 });
@@ -34,6 +40,21 @@ export const getLocations = () => {
   }
 }
 
-export const { setLocations } = locationSlice.actions;
+export const getSingleLocation = (name: string) => {
+  return async (dispatch: typeof store.dispatch) => {
+    try {
+      // change this whole thing when making a real request
+      const response = await fetch("/restaurants.json");
+      if (!response.ok) throw new Error("Error in response");
+      const json = await response.json();
+      const restaurant = json.find((item: ILocation) => item.name === name);
+      dispatch(setSingleLocation(restaurant));
+    } catch(error) {
+      console.error("Failed to fetch restaurants: " + error);
+    }
+  }
+}
+
+export const { setLocations, setSingleLocation } = locationSlice.actions;
 
 export default locationSlice.reducer;

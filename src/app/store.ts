@@ -3,6 +3,6 @@ import locationSlice from '../MainView/locationSlice';
 
 export default configureStore({
   reducer: {
-    locations: locationSlice
+    mapFunctionality: locationSlice
   }
 });
