@@ -45,7 +45,10 @@
       "tortilla",
       "biscuit"
     ],
-    "plantBasedLevel": "full"
+    "plantBasedLevel": "full",
+    "address": "3487 S Broadway, Englewood, CO 80113",
+    "userRating": 4.5,
+    "editorRating": 5
   },
   {
     "name": "Somebody People",
@@ -120,7 +123,10 @@
       "chamomile",
       "crescent green"
     ],
-    "plantBasedLevel": "full"
+    "plantBasedLevel": "full",
+    "address": "1165 S Broadway #104, Denver, CO 80210",
+    "userRating": 4.7,
+    "editorRating": 4
   },
   {
     "name": "Next Level Burger",
@@ -150,7 +156,10 @@
       "Spicy Stacked Chik'n",
       "Beyond Animal Burger"
     ],
-    "plantBasedLevel": "full"
+    "plantBasedLevel": "full",
+    "address": "1605 E Evans Ave, Denver, CO 80210",
+    "userRating": 4.3,
+    "editorRating": 4
   },
   {
     "name": "Mora Pizza Denver",
@@ -175,6 +184,9 @@
       "Cheesy Vegan Meatballs",
       "Bar Pizzas"
     ],
-    "plantBasedLevel": "partial"
+    "plantBasedLevel": "partial",
+    "address": "2700 E Colfax Ave, Denver, CO 80206",
+    "userRating": 3.9,
+    "editorRating": 4
   }
 ]

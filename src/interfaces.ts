@@ -8,5 +8,8 @@ export interface ILocation {
   dateUpdated: string;
   plantBasedLevel: string;
   menu: string[];
+  address: string;
+  editorRating: number;
+  userRating: number;
 }
 

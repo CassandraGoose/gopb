@@ -29,6 +29,8 @@ export const getLocations = () => {
         (item: ILocation) => {
           item.lat = parseFloat(item.lat as unknown as string);
           item.long = parseFloat(item.long as unknown as string);
+          item.userRating = parseFloat(item.userRating as unknown as string);
+          item.editorRating = parseFloat(item.editorRating as unknown as string);
           item.menu = item.menu.map((item) => item.toLowerCase());
           return item;
         }

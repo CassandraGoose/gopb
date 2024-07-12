@@ -10,3 +10,10 @@
 .mapboxgl-popup-content {
   padding: 0;
 }
+
+.multiple-items {
+  overflow: hidden;
+  min-width: 100%;
+  width: 0;
+ }
+

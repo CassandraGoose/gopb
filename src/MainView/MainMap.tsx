@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { Card, Button, Badge, Stats } from "react-daisyui";
+import { Card, Button, Badge } from "react-daisyui";
 import Map, {
   NavigationControl,
   AttributionControl,
@@ -9,8 +9,8 @@ import Map, {
   MapMouseEvent,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import LocationStats from './LocationStats';
 import { ILocation } from "../interfaces";
-import store from "../app/store";
 
 export default function MainMap({
   restaurants,
@@ -31,7 +31,7 @@ export default function MainMap({
       <Map
         mapboxAccessToken={import.meta.env.VITE_MAP_TOKEN}
         initialViewState={{ longitude: -104.99, latitude: 39.74, zoom: 10 }}
-        style={{ width: "100%", height: "45vh" }}
+        style={{ width: "100%", height: "55vh" }}
         mapStyle="mapbox://styles/mapbox/light-v11"
       >
         <NavigationControl showCompass showZoom />
@@ -82,32 +82,7 @@ export default function MainMap({
                     );
                   })}
                 </div>
-                <div className="flex flex-row justify-center items-center">
-                  <Stats className="font-sans bg-primary text-primary-content rounded stats-horizontal">
-                    <Stats.Stat>
-                      <Stats.Stat.Item variant="title">Rating</Stats.Stat.Item>
-                      <Stats.Stat.Item variant="value">4.5/5</Stats.Stat.Item>
-                      <Stats.Stat.Item
-                        variant="desc"
-                        className="whitespace-normal"
-                      >
-                        collected from GOPB users
-                      </Stats.Stat.Item>
-                    </Stats.Stat>
-                    <Stats.Stat>
-                      <Stats.Stat.Item variant="title">
-                        Editor Rating
-                      </Stats.Stat.Item>
-                      <Stats.Stat.Item variant="value">4.8/5</Stats.Stat.Item>
-                      <Stats.Stat.Item
-                        variant="desc"
-                        className="whitespace-normal"
-                      >
-                        based on editor's personal experience
-                      </Stats.Stat.Item>
-                    </Stats.Stat>
-                  </Stats>
-                </div>
+               <LocationStats location={selectedLocation} />
                 <Card.Actions className="flex justify-center items-center pt-4">
                   <Button color="primary" className="rounded join-item" onClick={() => setLocationParameter(selectedLocation.name)}>
                     See More Information

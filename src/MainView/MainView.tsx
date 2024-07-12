@@ -6,10 +6,10 @@ import { ILocation } from "../interfaces";
 import { getLocations } from "./locationSlice";
 import MapFormControls from "./MapFormControls";
 import MainMap from "./MainMap";
+import LocationDetails from "./LocationDetails";
 import { getSingleLocation } from './locationSlice';
 
 export default function MainView() {
-  // const [restaurants, setRestaurants] = useState<ILocation[] | []>([]);
   const [viewingRestaurants, setViewingRestaurants] = useState<
     ILocation[] | []
   >([]);
@@ -42,7 +42,7 @@ export default function MainView() {
         setViewingRestaurants={setViewingRestaurants}
       />
       <MainMap restaurants={viewingRestaurants} />
-      {selectedLocation && (<div>{selectedLocation.name}</div>)}
+      {selectedLocation && (<LocationDetails  location={selectedLocation} />)}
     </>
   );
 }
