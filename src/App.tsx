@@ -1,18 +1,18 @@
-import {
-  Routes, Route
-} from "react-router-dom";
-import "./App.css";
+import { Routes, Route } from "react-router-dom";
 import MainView from "./MainView/MainView.tsx";
 import Navigation from "./Navigation/Navigation.tsx";
-
+import AboutView
+ from "./AboutView/AboutView.tsx";
 function App() {
-  
   return (
     <>
       <Navigation />
-      <Routes>
-        <Route index element={<MainView />} />
-      </Routes>
+      <div className="px-8 mt-4">
+        <Routes>
+          <Route index element={<MainView />} />
+          <Route path="/about" element={<AboutView />} />
+        </Routes>
+      </div>
     </>
   );
 }

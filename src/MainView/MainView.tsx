@@ -23,9 +23,9 @@ export default function MainView() {
 
   useEffect(() => {
     const currentLocation = searchParams.get('selectedLocation') || '';
-    if (currentLocation) {
-      dispatch(getSingleLocation(currentLocation));
-    }
+
+    dispatch(getSingleLocation(currentLocation));
+
   }, [searchParams, dispatch])
 
     // TODO we don't know the type yet.
@@ -42,7 +42,7 @@ export default function MainView() {
         setViewingRestaurants={setViewingRestaurants}
       />
       <MainMap restaurants={viewingRestaurants} />
-      {selectedLocation && (<LocationDetails  location={selectedLocation} />)}
+      {selectedLocation && (<LocationDetails location={selectedLocation} />)}
     </>
   );
 }

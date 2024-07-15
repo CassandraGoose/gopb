@@ -26,6 +26,12 @@ export default function MainMap({
     setSearchParams({ selectedLocation: name });
   }
 
+  const clearLocation = () => {
+    console.log('hi')
+    setSearchParams({});
+    setSelectedLocation(null);
+  }
+
   return (
     <>
       <Map
@@ -58,7 +64,7 @@ export default function MainMap({
             closeOnClick
             longitude={selectedLocation.long}
             latitude={selectedLocation.lat}
-            onClose={() => setSelectedLocation(null)}
+            onClose={() => clearLocation()}
             anchor="top"
             maxWidth="700px"
           >
@@ -67,7 +73,7 @@ export default function MainMap({
                 <div>
                   <button
                     className="btn btn-square btn-sm absolute right-0 top-0 mt-2 mr-2"
-                    onClick={() => setSelectedLocation(null)}
+                    onClick={() => clearLocation()}
                   >
                     X
                   </button>

@@ -1,28 +1,16 @@
 import { Navbar, Button, Menu } from 'react-daisyui';
+import { Link } from 'react-router-dom';
 
 export default function Navigation() {
   return (
-    <Navbar>
+    <Navbar className="shadow-inner shadow-sm px-8">
       <div className="flex-1">
-        <Button tag="a" className="normal-case text-xl">GOPB</Button>
+        <Link to="/"><p className="text-4xl text-primary font-bold">GOPB!</p></Link>
       </div>
       <div className="flex-none">
         <Menu horizontal={true} className="px-1">
           <Menu.Item>
-            <a>Link</a>
-          </Menu.Item>
-          <Menu.Item>
-            <details>
-              <summary>Parent</summary>
-              <ul className="p-2 bg-base-100">
-                <li>
-                  <a>Link 1</a>
-                </li>
-                <li>
-                  <a>Link 2</a>
-                </li>
-              </ul>
-            </details>
+            <Link to="/about">ABOUT</Link>
           </Menu.Item>
         </Menu>
       </div>

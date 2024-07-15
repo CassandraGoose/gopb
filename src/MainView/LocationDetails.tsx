@@ -73,6 +73,49 @@ export default function LocationDetails({
             <img src={placeholder} alt="placeholder" />
           </div>
         </div>
+
+        <Card className="bg-secondary rounded border-secondary my-4">
+          <Card.Body>
+            <Card.Title tag="h3">Reviews</Card.Title>
+            <Card className="bg-primary rounded border-primary">
+              <Card.Body>
+                <Card.Title>
+                  <p>Editor Review: 07/15/2024</p>
+                </Card.Title>
+                <p>
+                  PLACEHOLDER: Located in the heart of the city, this vegan
+                  restaurant offers a delightful array of plant-based dishes
+                  crafted with fresh, locally sourced ingredients. From their
+                  innovative takes on classic comfort foods to their vibrant
+                  salads and delectable desserts, each dish reflects a
+                  commitment to both flavor and sustainability. The cozy
+                  ambiance and attentive service make it a perfect spot for both
+                  seasoned vegans and curious diners looking to explore
+                  plant-based cuisine.
+                </p>
+              </Card.Body>
+            </Card>
+            <Card className="bg-primary rounded border-primary">
+              <Card.Body>
+                <Card.Title>
+                  <p>Angela's Review: 07/15/2024</p>
+                </Card.Title>
+                <p>
+                  PLACEHOLDER: Located in the heart of the city, this vegan
+                  restaurant offers a delightful array of plant-based dishes
+                  crafted with fresh, locally sourced ingredients. From their
+                  innovative takes on classic comfort foods to their vibrant
+                  salads and delectable desserts, each dish reflects a
+                  commitment to both flavor and sustainability. The cozy
+                  ambiance and attentive service make it a perfect spot for both
+                  seasoned vegans and curious diners looking to explore
+                  plant-based cuisine.
+                </p>
+              </Card.Body>
+            </Card>
+          </Card.Body>
+        </Card>
+
         <Card.Actions className="justify-end flex justify-between">
           <div>
             <p>Tags:</p>
