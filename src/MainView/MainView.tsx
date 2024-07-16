@@ -13,6 +13,7 @@ export default function MainView() {
   const [viewingRestaurants, setViewingRestaurants] = useState<
     ILocation[] | []
   >([]);
+  const [mapView, setMapView] = useState(true);
 
   const [searchParams] = useSearchParams();
 
@@ -40,8 +41,11 @@ export default function MainView() {
       <MapFormControls
         restaurants={locations}
         setViewingRestaurants={setViewingRestaurants}
+        setMapView={setMapView}
+        mapView={mapView}
       />
-      <MainMap restaurants={viewingRestaurants} />
+      {mapView && <MainMap restaurants={viewingRestaurants} />}
+      {!mapView && <div> List view coming soon!</div>}
       {selectedLocation && (<LocationDetails location={selectedLocation} />)}
     </>
   );

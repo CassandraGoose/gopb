@@ -1,13 +1,17 @@
 import { useState, useEffect } from "react";
-import { Input, Select, Button } from "react-daisyui";
+import { Input, Select, Button, Join } from "react-daisyui";
 import { ILocation } from "../interfaces";
 
 export default function MapFormControls({
   restaurants,
   setViewingRestaurants,
+  setMapView,
+  mapView,
 }: {
   restaurants: ILocation[] | [];
   setViewingRestaurants: React.Dispatch<React.SetStateAction<ILocation[] | []>>;
+  setMapView: React.Dispatch<React.SetStateAction<boolean>>;
+  mapView: boolean;
 }) {
   const [searchKeyword, setSearchKeyword] = useState("");
   const [completedKeyword, setCompletedKeyword] = useState("");
@@ -122,6 +126,29 @@ export default function MapFormControls({
               Partiallay Plant-Based
             </Select.Option>
           </Select>
+        </div>
+        <div className="form control">
+          <label className="label">
+            <span className="label-text">View as...</span>
+          </label>
+          <Join>
+            <input
+              className="join-item btn rounded"
+              type="radio"
+              name="Map Radio"
+              aria-label="Map"
+              checked={mapView}
+              onChange={() => setMapView(true)}
+            />
+            <input
+              className="join-item btn rounded"
+              type="radio"
+              name="List"
+              aria-label="List"
+              checked={!mapView}
+              onChange={() => setMapView(false)}
+            />
+          </Join>
         </div>
       </div>
     </form>
