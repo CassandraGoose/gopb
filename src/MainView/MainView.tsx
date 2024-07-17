@@ -4,10 +4,10 @@ import { useSearchParams } from "react-router-dom";
 import store from "../app/store";
 import { ILocation } from "../interfaces";
 import { getLocations } from "./locationSlice";
-import MapFormControls from "./MapFormControls";
-import MainMap from "./MainMap";
+import MapFormControls from "./ViewFormControls/ViewFormControls";
+import MainMap from "./MapView/MainMap";
 import ListView from "./ListView";
-import LocationDetails from "./LocationDetails";
+import LocationDetails from "./Components/LocationDetails";
 import { getSingleLocation } from "./locationSlice";
 
 export default function MainView() {

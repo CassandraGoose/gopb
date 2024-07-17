@@ -1,12 +1,12 @@
 import { Stats } from 'react-daisyui';
-import { ILocation } from '../interfaces';
+import { ILocation } from '../../interfaces';
 export default function LocationStats({ location }: { location: ILocation | null }) {
   if (location === null) return (<p>Error showing location stats.</p>);
   
   const { userRating, editorRating } = location;
 
   return ( <div className="flex flex-row justify-center items-center">
-    <Stats className="font-sans bg-primary text-primary-content rounded stats-horizontal">
+    <Stats className="font-sans text-primary-content rounded stats-horizontal">
       <Stats.Stat>
         <Stats.Stat.Item variant="title">Rating</Stats.Stat.Item>
         <Stats.Stat.Item variant="value">{userRating}/5</Stats.Stat.Item>

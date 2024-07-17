@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
-import { Input, Select, Button, Join } from "react-daisyui";
-import { ILocation } from "../interfaces";
+import { Select, Join } from "react-daisyui";
+import { ILocation } from "../../interfaces";
+import Search from './Search';
+import SelectLocationType from './SelectLocationType';
 
 export default function MapFormControls({
   restaurants,
@@ -13,7 +15,6 @@ export default function MapFormControls({
   setMapView: React.Dispatch<React.SetStateAction<boolean>>;
   mapView: boolean;
 }) {
-  const [searchKeyword, setSearchKeyword] = useState("");
   const [completedKeyword, setCompletedKeyword] = useState("");
   const [locationType, setLocationType] = useState("Any");
   const [cuisineType, setCuisineType] = useState("Any");
@@ -56,43 +57,9 @@ export default function MapFormControls({
 
   return (
     <form className="flex w-full component-preview pb-2 items-center justify-between gap-2">
-      <div className="form-control flex flex-row items-end justify-center gap-2">
-        <div className="flex flex-col">
-          <label className="label">
-            <span className="label-text">Search by keyword, food, etc:</span>
-          </label>
-          <Input
-            type="search"
-            className="rounded"
-            placeholder="Search..."
-            onChange={(e) => setSearchKeyword(e.target.value)}
-          />
-        </div>
-        <Button
-          className="rounded"
-          onClick={(e) => {
-            e.preventDefault();
-            setCompletedKeyword(searchKeyword);
-          }}
-        >
-          Search
-        </Button>
-      </div>
+      <Search setCompletedKeyword={setCompletedKeyword}/>
       <div className="flex gap-2">
-        <div className="form control">
-          <label className="label">
-            <span className="label-text">Location Type:</span>
-          </label>
-          <Select
-            className="rounded border-1"
-            defaultValue={"Any"}
-            onChange={(e) => setLocationType(e.target.value)}
-          >
-            <Select.Option value="Any">Any</Select.Option>
-            <Select.Option value="Restaurant">Restaurant</Select.Option>
-            <Select.Option value="Grocery">Grocery</Select.Option>
-          </Select>
-        </div>
+        <SelectLocationType setLocationType={setLocationType} />
         <div className="form control">
           <label className="label">
             <span className="label-text">Cuisine Type:</span>

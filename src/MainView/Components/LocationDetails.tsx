@@ -1,7 +1,8 @@
-import { Card, Button, Badge } from "react-daisyui";
-import { ILocation } from "../interfaces";
+import { Card, Button } from "react-daisyui";
+import { ILocation } from "../../interfaces";
 import LocationStats from "./LocationStats";
-import placeholder from "../assets/placeholder_restaurant.png";
+import BadgeList from "./BadgeList";
+import placeholder from "../../assets/placeholder_restaurant.png";
 
 export default function LocationDetails({
   location,
@@ -29,15 +30,7 @@ export default function LocationDetails({
             <Card.Title tag="h2">{name}</Card.Title>
             <p>{address}</p>
             <p>{category}</p>
-            <div className="flex flex-row gap-2 max-w-[100%] flex-wrap">
-              {cuisine.map((cuisine) => {
-                return (
-                  <Badge key={cuisine + name} color="accent">
-                    {cuisine}
-                  </Badge>
-                );
-              })}
-            </div>
+            <BadgeList items={cuisine} locationName={name} />
           </div>
           <div className="w-1/4">
             <LocationStats location={location} />
@@ -119,15 +112,7 @@ export default function LocationDetails({
         <Card.Actions className="justify-end flex justify-between">
           <div>
             <p>Tags:</p>
-            <div className="flex flex-row gap-2 max-w-[100%] flex-wrap">
-              {tags.map((tag) => {
-                return (
-                  <Badge key={tag + name} color="accent">
-                    {tag}
-                  </Badge>
-                );
-              })}
-            </div>
+            <BadgeList items={tags} locationName={name} />
           </div>
           <a
             href={`https://www.google.com/maps/search/?api=1&query=${name} denver`}
