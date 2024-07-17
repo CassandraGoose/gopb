@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { useSearchParams } from "react-router-dom";
 import { Card, Button, Badge } from "react-daisyui";
 import Map, {
   NavigationControl,
@@ -9,28 +8,28 @@ import Map, {
   MapMouseEvent,
 } from "react-map-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import LocationStats from './LocationStats';
+import LocationStats from "./LocationStats";
 import { ILocation } from "../interfaces";
 
 export default function MainMap({
   restaurants,
+  setSearchParams,
+  selectedLocation,
 }: {
   restaurants: ILocation[] | [];
+  setSearchParams: (params: Record<string, string>) => void;
+  selectedLocation: ILocation | null;
 }) {
-  const [selectedLocation, setSelectedLocation] = useState<ILocation | null>(
-    null
-  );
-  const [, setSearchParams] = useSearchParams();
-
-  const setLocationParameter = (name: string) => {
-    setSearchParams({ selectedLocation: name });
-  }
+  const [selectedMapLocation, setSelectedMapLocation] =
+    useState<ILocation | null>(null);
 
   const clearLocation = () => {
-    console.log('hi')
+    console.log("hi its me")
+    setSelectedMapLocation(null);
     setSearchParams({});
-    setSelectedLocation(null);
-  }
+  };
+
+  const viewableLocation = selectedMapLocation || selectedLocation;
 
   return (
     <>
@@ -45,7 +44,9 @@ export default function MainMap({
         {restaurants.map((restaurant) => {
           return (
             <Marker
-              color={restaurant.category === 'Restaurant' ? '#A7E6D1' : '#F8C3CB'}
+              color={
+                restaurant.category === "Restaurant" ? "#A7E6D1" : "#F8C3CB"
+              }
               key={restaurant.name}
               longitude={restaurant.long}
               latitude={restaurant.lat}
@@ -53,18 +54,17 @@ export default function MainMap({
               offset={[0, 0]}
               onClick={(e: MapMouseEvent) => {
                 e.originalEvent.stopPropagation();
-                setSelectedLocation(restaurant);
+                setSelectedMapLocation(restaurant);
               }}
             />
           );
         })}
-        {selectedLocation && (
+        {viewableLocation && (
           <Popup
             focusAfterOpen
             closeOnClick
-            longitude={selectedLocation.long}
-            latitude={selectedLocation.lat}
-            onClose={() => clearLocation()}
+            longitude={viewableLocation.long}
+            latitude={viewableLocation.lat}
             anchor="top"
             maxWidth="700px"
           >
@@ -78,19 +78,25 @@ export default function MainMap({
                     X
                   </button>
                 </div>
-                <Card.Title tag="h2">{selectedLocation.name}</Card.Title>
+                <Card.Title tag="h2">{viewableLocation.name}</Card.Title>
                 <div className="flex flex-row gap-2 max-w-[100%] flex-wrap">
-                  {selectedLocation.tags.map((tag) => {
+                  {viewableLocation.tags.map((tag: string) => {
                     return (
-                      <Badge key={tag + selectedLocation.lat} color="accent">
+                      <Badge key={tag + viewableLocation.lat} color="accent">
                         {tag}
                       </Badge>
                     );
                   })}
                 </div>
-               <LocationStats location={selectedLocation} />
+                <LocationStats location={viewableLocation} />
                 <Card.Actions className="flex justify-center items-center pt-4">
-                  <Button color="primary" className="rounded join-item" onClick={() => setLocationParameter(selectedLocation.name)}>
+                  <Button
+                    color="primary"
+                    className="rounded join-item"
+                    onClick={() =>
+                      setSearchParams({ selectedLocation: viewableLocation.name })
+                    }
+                  >
                     See More Information
                   </Button>
                 </Card.Actions>
