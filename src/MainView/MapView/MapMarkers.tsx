@@ -15,7 +15,7 @@ export default function MapMarkers({
       {restaurants.map((restaurant) => {
         return (
           <Marker
-            color={restaurant.category === "Restaurant" ? "#A7E6D1" : "#F8C3CB"}
+            color={restaurant.category === "Restaurant" ? "#90E0C5" : "#F292A0"}
             key={restaurant.name}
             longitude={restaurant.long}
             latitude={restaurant.lat}
