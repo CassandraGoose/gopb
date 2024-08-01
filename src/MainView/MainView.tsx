@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
 import store from "../app/store";
 import { ILocation } from "../interfaces";
-import { getLocations } from "./locationSlice";
+import { getLocations } from "../app/locationSlice";
 import MapFormControls from "./ViewFormControls/ViewFormControls";
 import MainMap from "./MapView/MainMap";
 import ListView from "./ListView";
 import LocationDetails from "./Components/LocationDetails";
-import { getSingleLocation } from "./locationSlice";
+import { getSingleLocation } from "../app/locationSlice";
 
 export default function MainView() {
   const [viewingRestaurants, setViewingRestaurants] = useState<
@@ -24,9 +24,10 @@ export default function MainView() {
   }, [dispatch]);
 
   useEffect(() => {
-    const currentLocation = searchParams.get("selectedLocation") || "";
-
-    dispatch(getSingleLocation(currentLocation));
+    const currentLocation = searchParams.get("location") || "";
+    if (currentLocation) {
+      dispatch(getSingleLocation(currentLocation));
+    }
   }, [searchParams, dispatch]);
 
   // TODO we don't know the type yet.

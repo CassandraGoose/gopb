@@ -22,7 +22,7 @@ export default function ListView({
       </Table.Head>
       <Table.Body>
         {restaurants.map((location) => {
-          const { name, cuisine, address } = location;
+          const { name, cuisine, address, id } = location;
           return (
             <Table.Row
               key={`listview-${name}-location`}
@@ -49,7 +49,7 @@ export default function ListView({
               <Button
                 color="primary"
                 className="rounded join-item"
-                onClick={() => setSearchParams({ selectedLocation: name })}
+                onClick={() => setSearchParams({ location: id })}
               >
                 See More Information
               </Button>

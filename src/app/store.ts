@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import locationSlice from '../MainView/locationSlice';
+import locationSlice from './locationSlice';
 
 export default configureStore({
   reducer: {

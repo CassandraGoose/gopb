@@ -43,7 +43,7 @@ export default function MapPopup({
               className="rounded join-item"
               onClick={() =>
                 setSearchParams({
-                  selectedLocation: viewableLocation.name,
+                  location: viewableLocation.id,
                 })
               }
             >
