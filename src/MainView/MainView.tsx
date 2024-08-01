@@ -25,9 +25,7 @@ export default function MainView() {
 
   useEffect(() => {
     const currentLocation = searchParams.get("location") || "";
-    if (currentLocation) {
-      dispatch(getSingleLocation(currentLocation));
-    }
+    dispatch(getSingleLocation(currentLocation));
   }, [searchParams, dispatch]);
 
   // TODO we don't know the type yet.

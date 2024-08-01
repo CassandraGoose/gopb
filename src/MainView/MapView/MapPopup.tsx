@@ -20,6 +20,7 @@ export default function MapPopup({
       latitude={viewableLocation.lat}
       anchor="top"
       maxWidth="700px"
+      onClose={() => clearLocation()}
     >
       <Card className="bg-base-100 py-2 rounded gap-2">
         <Card.Body className="py-2 w-96">

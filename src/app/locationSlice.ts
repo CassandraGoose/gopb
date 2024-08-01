@@ -21,7 +21,6 @@ export const getLocations = () => {
   return async (dispatch: typeof store.dispatch) => {
     try {
       const response = await fetch(`${import.meta.env.VITE_API_URL}/locations`);
-      console.log(`${import.meta.env.VITE_API_URL}/locations`);
       if (!response.ok) throw new Error("Error in response");
       const locations = await response.json();
       dispatch(setLocations(locations));
@@ -34,10 +33,13 @@ export const getLocations = () => {
 export const getSingleLocation = (id: string) => {
   return async (dispatch: typeof store.dispatch) => {
     try {
-      const response = await fetch(`${import.meta.env.VITE_API_URL}/locations/${id}`);
-      if (!response.ok) throw new Error("Error in response");
-      const location = await response.json();
-      dispatch(setSingleLocation(location));
+      if (!id) dispatch(setSingleLocation(null));
+      else {
+        const response = await fetch(`${import.meta.env.VITE_API_URL}/locations/${id}`);
+        if (!response.ok) throw new Error("Error in response");
+        const location = await response.json();
+        dispatch(setSingleLocation(location));
+      }
     } catch(error) {
       console.error("Failed to fetch location: " + error);
     }
